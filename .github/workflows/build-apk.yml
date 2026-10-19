@@ -12,8 +12,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
+      - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Extract project ZIP if source is not already present
+        shell: bash
+        run: |
+          if [ ! -f app/build.gradle.kts ]; then
+            if [ -f MyDailyChecklist-Android-Project-FIXED.zip ]; then
+              unzip -o MyDailyChecklist-Android-Project-FIXED.zip -d .
+            else
+              echo "Android source is missing. Upload the fixed project ZIP to the repository root, named MyDailyChecklist-Android-Project-FIXED.zip, or upload the extracted project files."
+              exit 1
+            fi
+          fi
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
