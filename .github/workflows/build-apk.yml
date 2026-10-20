@@ -18,7 +18,7 @@ jobs:
       - name: Extract project ZIP if source is not already present
         shell: bash
         run: |
-          if [ ! -f app/build.gradle.kts ]; then
+          if [ ! -f app/build.gradle ] && [ ! -f app/build.gradle.kts ]; then
             if [ -f MyDailyChecklist-Android-Project-FIXED.zip ]; then
               unzip -o MyDailyChecklist-Android-Project-FIXED.zip -d .
             else
