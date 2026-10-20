@@ -48,8 +48,7 @@ class ChecklistWidgetProvider : AppWidgetProvider() {
 
             tasks.forEachIndexed { index, task ->
                 val row = RemoteViews(context.packageName, R.layout.widget_task_row)
-                row.setTextViewText(R.id.widget_task_check, task)
-                row.setBoolean(R.id.widget_task_check, "setChecked", task in done)
+                row.setTextViewText(R.id.widget_task_check, (if (task in done) "☑  " else "☐  ") + task)
                 val toggle = Intent(context, ChecklistWidgetProvider::class.java).apply {
                     action = ACTION_TOGGLE
                     putExtra(EXTRA_TASK, task)
